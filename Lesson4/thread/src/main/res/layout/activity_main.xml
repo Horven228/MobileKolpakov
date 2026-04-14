@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Инфо о потоке"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:id="@+id/editTextPairs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Общее количество пар за месяц"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/editTextDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Количество учебных дней"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/buttonCalculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Посчитать среднее" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Результат появится здесь"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

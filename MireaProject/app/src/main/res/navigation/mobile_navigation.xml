@@ -36,4 +36,25 @@
         android:name="ru.mirea.kolpakovap.mireaproject.WebViewFragment"
         android:label="Браузер"
         tools:layout="@layout/fragment_web_view" />
+    <fragment
+        android:id="@+id/nav_worker"
+        android:name="ru.mirea.kolpakovap.mireaproject.ui.WorkerFragment"
+        android:label="Фоновая задача"
+        tools:layout="@layout/fragment_worker" />
+    <fragment
+        android:id="@+id/nav_sensors"
+        android:name="ru.mirea.kolpakovap.mireaproject.SensorsFragment"
+        android:label="Компас"
+        tools:layout="@layout/fragment_sensors" />
+
+    <fragment
+        android:id="@+id/nav_camera"
+        android:name="ru.mirea.kolpakovap.mireaproject.CameraFragment"
+        android:label="Профиль"
+        tools:layout="@layout/fragment_camera" />
+    <fragment
+        android:id="@+id/nav_microphone"
+        android:name="ru.mirea.kolpakovap.mireaproject.MicrophoneFragment"
+        android:label="Диктофон"
+        tools:layout="@layout/fragment_microphone" />
 </navigation>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите ваш возраст"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/editTextJob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Кем вы работаете?" />
+
+    <Button
+        android:id="@+id/buttonExecute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Отправить в Looper" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Результат появится здесь"
+        android:textSize="16sp" />
+</LinearLayout>

@@ -26,5 +26,21 @@
             android:id="@+id/nav_webview"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Браузер" />
+        <item
+            android:id="@+id/nav_worker"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Фоновая задача" />
+        <item
+            android:id="@+id/nav_sensors"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:title="Компас" />
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="Профиль" />
+        <item
+            android:id="@+id/nav_microphone"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="Голосовая заметка" />
     </group>
 </menu>
