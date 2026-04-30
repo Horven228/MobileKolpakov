@@ -2,17 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- РАЗРЕШЕНИЯ ДЛЯ ПРАКТИКИ №5 -->
+    <!-- РАЗРЕШЕНИЯ ДЛЯ ПРАКТИКИ №5 И №7 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!-- ДОБАВЛЕНО: Разрешение для работы микрофона (диктофона) -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <!-- Железо (чтобы система знала, что нам нужны эти функции) -->
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-feature android:name="android.hardware.microphone" android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -20,20 +22,30 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MireaProject">
+        android:theme="@style/Theme.MireaProject"
+        android:usesCleartextTraffic="true">
 
+
+        <!-- LoginActivity теперь главная точка входа (LAUNCHER) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.MireaProject.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- ОБЯЗАТЕЛЬНЫЙ БЛОК ПРОВАЙДЕРА ДЛЯ КАМЕРЫ -->
+        <!-- MainActivity теперь открывается только после успешного входа -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MireaProject.NoActionBar">
+        </activity>
+
+        <!-- ОБЯЗАТЕЛЬНЫЙ БЛОК ПРОВАЙДЕРА ДЛЯ КАМЕРЫ (из Практики №5) -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="ru.mirea.kolpakovap.mireaproject.fileprovider"

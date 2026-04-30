@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">FirebaseAuth</string>
+    <string name="label_emailpassword">Email/Password Authentication</string>
+    <string name="desc_emailpassword">Используйте почту и пароль для Firebase.</string>
+    <string name="hint_user_id">User ID</string>
+    <string name="sign_in">Войти</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="sign_out">Выйти</string>
+    <string name="verify_email">Подтвердить почту</string>
+    <string name="signed_in">Авторизован</string>
+    <string name="signed_out">Не авторизован</string>
+    <string name="auth_failed">Ошибка аутентификации</string>
+    <string name="firebase_status_fmt">Firebase UID: %s</string>
+    <string name="emailpassword_status_fmt">User: %1$s (verified: %2$b)</string>
+    <string name="emailpassword_title_text">Email and Password</string>
+</resources>

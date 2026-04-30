@@ -29,10 +29,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
+
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Сообщение из MainActivity", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Проект подготовила: Колпакова П.А.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null)
                         .setAnchorView(R.id.fab).show();
             }
@@ -41,10 +42,12 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
-
+        // Регистрируем все фрагменты как "верхнеуровневые"
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_data, R.id.nav_webview, R.id.nav_worker,
-                R.id.nav_sensors, R.id.nav_camera, R.id.nav_microphone)
+                R.id.nav_home, R.id.nav_profile, R.id.nav_file_work,
+                R.id.nav_gallery, R.id.nav_data, R.id.nav_webview,
+                R.id.nav_worker, R.id.nav_sensors, R.id.nav_camera,
+                R.id.nav_microphone, R.id.nav_network) // Добавлен nav_network
                 .setOpenableLayout(drawer)
                 .build();
 
@@ -55,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Обычное меню (три точки в углу)
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }

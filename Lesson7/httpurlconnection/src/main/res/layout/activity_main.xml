@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center_horizontal">
+
+    <Button
+        android:id="@+id/btnGetData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Узнать погоду по IP"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView android:id="@+id/tvIP" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="IP: " />
+    <TextView android:id="@+id/tvCity" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Город: " />
+    <TextView android:id="@+id/tvRegion" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Регион: " />
+    <TextView android:id="@+id/tvLoc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Координаты: " />
+    <TextView
+        android:id="@+id/tvWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Температура: "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>

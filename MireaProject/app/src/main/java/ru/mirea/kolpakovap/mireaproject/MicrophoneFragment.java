@@ -1,4 +1,4 @@
-package ru.mirea.kolpakovap.mireaproject; // Проверьте, что ваш package совпадает!
+package ru.mirea.kolpakovap.mireaproject;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
