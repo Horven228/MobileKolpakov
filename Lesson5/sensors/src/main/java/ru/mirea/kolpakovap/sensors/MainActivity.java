@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // Обработка отступов для безрамочного экрана (сохранено из вашего шаблона)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -44,9 +43,13 @@ public class MainActivity extends AppCompatActivity {
         // 4. Создаем массив данных для отображения (Имя датчика и его максимальный диапазон)
         ArrayList<HashMap<String, Object>> arrayList = new ArrayList<>();
 
+        // проходимся по каждому даатчику в цикле
         for (int i = 0; i < sensors.size(); i++) {
+            // создааём контейнер (словарик) для данных одного конкретного датчика
             HashMap<String, Object> sensorMap = new HashMap<>();
+            // getName() — получаем название датчика
             sensorMap.put("Name", sensors.get(i).getName());
+            // getMaximumRange() — получаем его диапазон
             sensorMap.put("Value", "Макс. диапазон: " + sensors.get(i).getMaximumRange());
             arrayList.add(sensorMap);
         }

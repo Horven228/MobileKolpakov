@@ -13,25 +13,30 @@ import androidx.appcompat.app.AppCompatActivity;
 // Добавляем implements SensorEventListener
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
+    // Переменные для текстовых полей, которые мы создали в activity_main.xml
     private TextView azimuthTextView;
     private TextView pitchTextView;
     private TextView rollTextView;
+
+    // Менеджер для доступа к датчикам системы
     private SensorManager sensorManager;
+    // Переменная для хранения ссылки на конкретный датчик (акселерометр)
     private Sensor accelerometerSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Привязываем разметку XML к этому Java-классу
         setContentView(R.layout.activity_main);
 
-        // Инициализируем элементы UI
+        // Связываем Java-переменные с элементами UI по их ID из XML
         azimuthTextView = findViewById(R.id.textViewAzimuth);
         pitchTextView = findViewById(R.id.textViewPitch);
         rollTextView = findViewById(R.id.textViewRoll);
 
-        // Инициализируем SensorManager
+        // Получаем доступ к системному сервису датчиков
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        // Инициализируем сам датчик акселерометра
+        // Пытаемся найти в системе именно акселерометр
         accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Главный метод: вызывается каждый раз при изменении положения телефона
     @Override
     public void onSensorChanged(SensorEvent event) {
+        // Проверяем, что данные пришли именно от акселерометра (на случай, если мы слушаем сразу много датчиков)
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float valueX = event.values[0]; // Ось X
             float valueY = event.values[1]; // Ось Y
@@ -64,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-    // Этот метод должен быть по интерфейсу, но он нам не нужен (точность)
+    // Вызывается, когда меняется точность датчика (например, из-за калибровки).
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }

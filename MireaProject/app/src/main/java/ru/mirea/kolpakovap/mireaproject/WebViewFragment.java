@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 public class WebViewFragment extends Fragment {
     // Это «менеджер» экрана с браузером. Он управляет элементом из fragment_web_view.xml.
     public WebViewFragment() {
-        // Обязательный пустой конструктор
+
     }
 
     @Override

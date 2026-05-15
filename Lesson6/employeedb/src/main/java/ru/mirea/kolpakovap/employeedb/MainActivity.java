@@ -14,33 +14,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView textView = findViewById(R.id.textView); // Убедись, что в layout есть TextView с таким id
+        TextView textView = findViewById(R.id.textView);
 
-        // 1. Инициализация базы данных
+        // 1. Сборка базы данных.
+        // "database-name" — это имя физического файла базы на диске телефона.
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                         AppDatabase.class, "database-name")
-                .allowMainThreadQueries() // Разрешаем запросы в основном потоке (только для ЛР!)
+                // allowMainThreadQueries() позволяет делать запросы в главном потоке.
+                .allowMainThreadQueries()
                 .build();
 
+        // Получаем объект DAO через нашу базу
         HeroDao heroDao = db.heroDao();
 
-        // 2. Добавление героя
+        // 2. Создаем объект Героя и сохраняем его в базу
         Hero hero = new Hero();
         hero.name = "Человек-паук";
         hero.superpower = "Лазание по стенам, чутье";
-        heroDao.insert(hero);
+        heroDao.insert(hero); // Запись улетает в БД
 
-        // 3. Получение списка всех героев
+        // 3. Получаем из базы список ВООБЩЕ ВСЕХ героев, которые там накопились
         List<Hero> heroes = heroDao.getAll();
 
-        // 4. Вывод в Лог и на экран
+        // 4. Формируем красивую строку для отображения на экране
         StringBuilder sb = new StringBuilder();
         for (Hero h : heroes) {
             String info = "ID: " + h.id + ", Name: " + h.name + ", Power: " + h.superpower;
+            // Пишем в Logcat для отладки
             Log.d("RoomDB", info);
+            // Добавляем в StringBuilder для экрана
             sb.append(info).append("\n");
         }
 
+        // Выводим накопленный текст в TextView
         textView.setText(sb.toString());
     }
 }

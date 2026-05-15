@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.content.ContextCompat;
@@ -25,9 +26,13 @@ import java.util.Date;
 import java.util.Locale;
 
 public class CameraFragment extends Fragment {
-    private ImageView avatarImage;
-    private Uri imageUri;
+    private final String TAG = "CameraFragment";
+    private ImageView avatarImage; // Рамка для фото
+    private Uri imageUri;          // Путь к сохраненному фото
+
+    // Лаунчер для обработки фото после того, как камера закроется
     private ActivityResultLauncher<Intent> cameraLauncher;
+    // Лаунчер для вызова системного окна разрешений
     private ActivityResultLauncher<String> permissionLauncher;
 
     @Override
@@ -35,31 +40,37 @@ public class CameraFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_camera, container, false);
         avatarImage = root.findViewById(R.id.imageViewAvatar);
 
-        // Обработчик результата съемки
+        // Инициализируем лаунчер получения результата от камеры
         cameraLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
+                    // Если фото сделано — ставим его в ImageView
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         avatarImage.setImageURI(imageUri);
+                        Log.d(TAG, "Фото успешно установлено");
                     }
                 });
 
-        // Обработчик запроса разрешения
+        // Инициализируем лаунчер для запроса разрешения
         permissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
+                    // Если юзер разрешил — запускаем метод съемки
                     if (isGranted) {
                         dispatchTakePictureIntent();
                     } else {
-                        Toast.makeText(getContext(), "Нужно разрешение на камеру!", Toast.LENGTH_SHORT).show();
+                        Log.w(TAG, "Доступ к камере запрещен");
+                        Toast.makeText(getContext(), "Нужно разрешение!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
+        // Кнопка "Сделать фото"
         root.findViewById(R.id.buttonMakePhoto).setOnClickListener(v -> {
-            // Проверяем разрешение перед запуском камеры
+            // Проверяем: есть ли уже права на камеру?
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 dispatchTakePictureIntent();
             } else {
+                // Если нет — запускаем окно запроса
                 permissionLauncher.launch(Manifest.permission.CAMERA);
             }
         });
@@ -67,23 +78,31 @@ public class CameraFragment extends Fragment {
         return root;
     }
 
+    // Метод подготовки приказа для открытия камеры
     private void dispatchTakePictureIntent() {
+        Log.d(TAG, "Запуск камеры...");
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
+            // Создаем пустой файл под будущий снимок
             File photoFile = createImageFile();
-            // СТРОКА ДОЛЖНА СОВПАДАТЬ С authorities В МАНИФЕСТЕ
+            // Генерируем безопасный путь через FileProvider
             String authorities = requireContext().getPackageName() + ".fileprovider";
             imageUri = FileProvider.getUriForFile(requireContext(), authorities, photoFile);
+            // Сохраним результат вот по этому адресу
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
             cameraLauncher.launch(cameraIntent);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Ошибка файла", e);
         }
     }
 
+    // Метод генерации пустого .jpg файла в памяти телефона
     private File createImageFile() throws IOException {
+        // Имя файла на основе текущего времени (чтобы не повторялись)
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
+        // Путь к папке картинок нашего приложения
         File storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        // Создаем сам файл
         return File.createTempFile("PHOTO_" + timeStamp, ".jpg", storageDir);
     }
 }

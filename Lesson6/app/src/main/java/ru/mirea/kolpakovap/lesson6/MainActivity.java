@@ -1,5 +1,7 @@
+// Указывает на принадлежность файла к твоему проекту
 package ru.mirea.kolpakovap.lesson6;
 
+// Импорт необходимых классов Android для работы с интерфейсом и настройками
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,59 +18,70 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Объявляем переменные для полей ввода (чтобы получить текст от пользователя)
     private EditText editTextGroup;
     private EditText editTextNumber;
     private EditText editTextMovie;
+
+    // Объявляем переменную для работы с хранилищем настроек
     private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // Настройка отступов для безрамочного экрана
+        // Код для настройки отступов (Insets).
+        // Нужен, чтобы элементы интерфейса не перекрывались строкой состояния (время, батарея)
+        // или нижней навигационной панелью телефона.
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // 1. Привязываем переменные к элементам на экране
+        // 1. СВЯЗЫВАНИЕ: Находим элементы в XML-файле по их ID и привязываем к Java-переменным
         editTextGroup = findViewById(R.id.editTextGroup);
         editTextNumber = findViewById(R.id.editTextNumber);
         editTextMovie = findViewById(R.id.editTextMovie);
         Button buttonSave = findViewById(R.id.buttonSave);
 
-        // 2. Инициализируем SharedPreferences (название файла "mirea_settings")
+        // 2. ИНИЦИАЛИЗАЦИЯ ХРАНИЛИЩА:
+        // MODE_PRIVATE — означает, что доступ к файлу будет только у этого приложения (безопасно).
         sharedPref = getSharedPreferences("mirea_settings", Context.MODE_PRIVATE);
 
-        // 3. ЗАГРУЗКА: При запуске читаем данные из памяти
+        // 3. ЗАГРУЗКА ДАННЫХ:
+        // Метод getString(ключ, значение_по_умолчанию).
+        // Если в памяти еще ничего нет (первый запуск), вернется пустая строка "".
         String savedGroup = sharedPref.getString("GROUP", "");
         String savedNumber = sharedPref.getString("NUMBER", "");
         String savedMovie = sharedPref.getString("MOVIE", "");
 
-        // Устанавливаем загруженные данные в поля ввода
+        // Сразу отображаем загруженные данные в полях ввода, чтобы пользователь их увидел
         editTextGroup.setText(savedGroup);
         editTextNumber.setText(savedNumber);
         editTextMovie.setText(savedMovie);
 
-        // 4. СОХРАНЕНИЕ: Обработка нажатия на кнопку
+        // 4. СОХРАНЕНИЕ ДАННЫХ: Устанавливаем слушатель нажатия на кнопку
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Создаем редактор для изменения настроек
+                // Чтобы записывать данные, нужно создать объект Editor (Редактор)
                 SharedPreferences.Editor editor = sharedPref.edit();
 
-                // Записываем данные из полей ввода в SharedPreferences
+                // Кладем данные в "корзину" редактора в формате (КЛЮЧ, ЗНАЧЕНИЕ)
+                // Ключи должны быть такими же, как при загрузке!
                 editor.putString("GROUP", editTextGroup.getText().toString());
                 editor.putString("NUMBER", editTextNumber.getText().toString());
                 editor.putString("MOVIE", editTextMovie.getText().toString());
 
-                // Сохраняем (apply работает асинхронно и быстрее чем commit)
+                // ФИНАЛИЗАЦИЯ: Команда применить изменения.
+                // Метод apply() сохраняет данные в фоне, не тормозя работу приложения.
                 editor.apply();
 
-                // Выводим уведомление для пользователя
+                // Обратная связь: показываем пользователю, что кнопка сработала
                 Toast.makeText(MainActivity.this, "Данные успешно сохранены!", Toast.LENGTH_SHORT).show();
             }
         });
