@@ -5,45 +5,34 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
-    <!-- ... все твои существующие фрагменты (home, gallery и т.д.) ... -->
-
-    <!-- [ДОБАВИТЬ ЭТО] Фрагмент Профиля для Практики 6 (SharedPreferences) -->
-    <fragment
-        android:id="@+id/nav_profile"
-        android:name="ru.mirea.kolpakovap.mireaproject.ProfileFragment"
-        android:label="Мой Профиль"
-        tools:layout="@layout/fragment_profile" />
-
-    <!-- [ДОБАВИТЬ ЭТО] Фрагмент для работы с файлами (FAB + Шифрование) -->
-    <fragment
-        android:id="@+id/nav_file_work"
-        android:name="ru.mirea.kolpakovap.mireaproject.FileWorkFragment"
-        android:label="Работа с файлами"
-        tools:layout="@layout/fragment_file_work" />
-
-    <!-- Оставляем остальные без изменений -->
     <fragment
         android:id="@+id/nav_home"
         android:name="ru.mirea.kolpakovap.mireaproject.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="ru.mirea.kolpakovap.mireaproject.ProfileFragment"
+        android:label="Личные данные"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_file_work"
+        android:name="ru.mirea.kolpakovap.mireaproject.FileWorkFragment"
+        android:label="Заметки (файлы)"
+        tools:layout="@layout/fragment_file_work" />
 
     <fragment
         android:id="@+id/nav_gallery"
         android:name="ru.mirea.kolpakovap.mireaproject.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:label="Gallery"
         tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="ru.mirea.kolpakovap.mireaproject.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_data"
         android:name="ru.mirea.kolpakovap.mireaproject.DataFragment"
-        android:label="Информация"
+        android:label="Данные об отрасли"
         tools:layout="@layout/fragment_data" />
 
     <fragment
@@ -54,7 +43,7 @@
 
     <fragment
         android:id="@+id/nav_worker"
-        android:name="ru.mirea.kolpakovap.mireaproject.ui.WorkerFragment"
+        android:name="ru.mirea.kolpakovap.mireaproject.WorkerFragment"
         android:label="Фоновая задача"
         tools:layout="@layout/fragment_worker" />
 
@@ -62,23 +51,30 @@
         android:id="@+id/nav_sensors"
         android:name="ru.mirea.kolpakovap.mireaproject.SensorsFragment"
         android:label="Компас"
-        tools:layout="@layout/fragment_sensors" />
+        tools:layout="@layout/fragment_sensor" />
 
     <fragment
         android:id="@+id/nav_camera"
         android:name="ru.mirea.kolpakovap.mireaproject.CameraFragment"
-        android:label="Камера"
+        android:label="Фото профиля"
         tools:layout="@layout/fragment_camera" />
 
     <fragment
         android:id="@+id/nav_microphone"
         android:name="ru.mirea.kolpakovap.mireaproject.MicrophoneFragment"
-        android:label="Диктофон"
+        android:label="Голосовая заметка"
         tools:layout="@layout/fragment_microphone" />
+
     <fragment
         android:id="@+id/nav_network"
-        android:name="ru.mirea.kolpakovap.mireaproject.network.NetworkFragment"
+        android:name="ru.mirea.kolpakovap.mireaproject.NetworkFragment"
         android:label="Сеть (Retrofit)"
         tools:layout="@layout/fragment_network" />
+
+    <fragment
+        android:id="@+id/nav_places"
+        android:name="ru.mirea.kolpakovap.mireaproject.PlacesFragment"
+        android:label="Заведения"
+        tools:layout="@layout/fragment_places" />
 
 </navigation>

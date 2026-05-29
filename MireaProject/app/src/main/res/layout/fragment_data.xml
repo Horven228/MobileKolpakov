@@ -1,30 +1,25 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp">
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F5F5F5">
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Отрасль: Робототехника"
-        android:textSize="26sp"
+        android:text="IT Отрасль"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="?attr/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="#3F51B5"
+        android:layout_marginBottom="16dp"/>
 
     <TextView
-        android:id="@+id/description"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Робототехника сегодня — это не только заводы, но и медицина, космос и быт. Современные роботы используют ИИ для навигации и взаимодействия с людьми."
+        android:text="Сфера информационных технологий занимается созданием, хранением и управлением данными с помощью компьютеров. Это одна из самых быстрорастущих отраслей в мире."
         android:textSize="18sp"
-        android:lineSpacingExtra="4dp"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textColor="#333333"
+        android:lineSpacingExtra="4dp"/>
+</LinearLayout>
